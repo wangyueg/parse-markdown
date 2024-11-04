@@ -37,7 +37,9 @@ export const getTitles = (markedContent: string) => {
 	const res = markedContent.match(/<h[3-4]>([\d\D]+?)<\/h[3-4]>/g) || [];
 	const config: ICatalogConfig[] = [];
 	res.forEach((str: string) => {
-		const title = str.replace(/<\w+>/g, "").replace(/<\/\w+>/g, "");
+		// 1. 去除开始标签及结束标签，包含其内容
+		// 2. 针对目录中的&lt; 转化为<
+		const title = str.replace(/<\w+>/g, "").replace(/<\/\w+>/g, "").replace(/&lt;/g, '<');
 
 		if (/^<h3>/.test(str)) {
 			config.push({
