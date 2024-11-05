@@ -22,8 +22,8 @@ export const getHeaderConfig = (originContent: string = ""): IHeaderConfig => {
 		.split("\n");
 
 	strsList.forEach((str: string = "") => {
-		const arr: string[] = str.split(":");
-		config[arr[0]] = arr[1].trim();
+		const arr: string[] = str.split(/:\s/);
+		config[arr[0]] = arr.splice(1).join('').trim();
 	});
 
 	return config;
